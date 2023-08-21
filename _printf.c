@@ -12,10 +12,20 @@
 int _printf(const char *format, ...)
 {
 	int index;
+	va_list args;
+
+	va_start(args, format);
 
 	for (index = 0; *(format + index) != '\0'; index++)
 	{
-		write(1, format + index, 1);
+		if (*(format + index) == '%')
+		{
+			conv(format + ++index)(args);
+		}
+		else
+		{
+			write(1, format + index, 1);
+		}
 	}
 	return (index);
 }
