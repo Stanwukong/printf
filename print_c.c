@@ -2,7 +2,7 @@
 
 /**
  * print_c - Prints a character character
- * @arg: conversion specifier
+ * @arg: A va_list pointinig to the format to print.
  *
  * Return: Function pointer to function
  */
