@@ -20,8 +20,10 @@ typedef struct formatter {
 } format_spec;
 
 int _printf(const char *format, ...);
-void (*conv(const char *symbol))(va_list arg);
+void (*conv(const char *letter))(va_list arg);
 void print_c(va_list arg);
 void print_s(va_list arg);
+void print_d(va_list arg);
+void print_i(va_list arg);
 
 #endif
