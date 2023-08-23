@@ -24,17 +24,17 @@
 
 
 /**
- * struct formatter - A new struct type defining a converter struct.
- * @symbol: A letter representing a format type
+ * struct converter_s - A new struct type defining a converter struct.
+ * @specifier: A letter representing a format type
  * @func: A function pointer to a function that prints
  *	a format type corresponding to symbol.
  *
  */
-typedef struct format {
-	char *letter;
+typedef struct converter_s {
+	char *specifier;
 	unsigned int (*func)(va_list, buffer_t *, unsigned char,
 			int, int, unsigned char);
-} format_spec;
+} converter_t;
 
 /**
  * struct buffer_struct - A new type defining a buffer struct.
@@ -47,7 +47,7 @@ typedef struct buffer_struct
 	char *buffer;
 	char *start;
 	unsigned int length;
-} buffer_type;
+} buffer_t;
 
 /**
  * struct flag_struct - A new type definig a flags struct.
@@ -58,7 +58,7 @@ typedef struct flag_s
 {
 	unsigned char flag;
 	unsigned char value;
-} flag_type;
+} flag_t;
 
 /* Conversion Specifier Functions */
 unsigned int convert_c(va_list args, buffer_t *output,
@@ -103,6 +103,13 @@ unsigned int print_string_width(buffer_t *output,
 		unsigned char flags, int wid, int prec, int size);
 unsigned int print_neg_width(buffer_t *output, unsigned int printed,
 		unsigned char flags, int wid);
+
+/* Handlet Prototypes */
+unsigned char handle_flags(const char *flag, char *index);
+unsigned char handle_length(const char *modifier, char *index);
+int handle_precision(va_list args, const char *modifier, char *index);
+unsigned int (*handle_specifiers(const char *specifier))(va_list, buffer_t *, unsigned char, int, int, unsigned char);
+int handle_width(va_list args, const char *modifier, char *index);
 
 /* Helper Functions */
 buffer_t *init_buffer(void);

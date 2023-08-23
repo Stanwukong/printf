@@ -9,7 +9,7 @@
 
 int _printf(const char *format, ...)
 {
-	buffer_type *output;
+	buffer_t *output;
 	va_list args;
 	int res;
 
